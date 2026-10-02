@@ -1,0 +1,33 @@
+class MinStack {
+
+    private final Deque<Integer> stack;
+    private final Deque<Integer> minStack;
+
+    public MinStack() {
+        stack = new ArrayDeque<>();
+        minStack = new ArrayDeque<>();
+    }
+
+    public void push(int val) {
+        stack.push(val);
+        // Push onto minStack if it's the first element or <= current minimum
+        if (minStack.isEmpty() || val <= minStack.peek()) {
+            minStack.push(val);
+        }
+    }
+
+    public void pop() {
+        int popped = stack.pop();
+        if (popped == minStack.peek()) {
+            minStack.pop();
+        }
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return minStack.peek();
+    }
+}
